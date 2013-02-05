@@ -7,6 +7,7 @@ gem 'sorcery', '~> 0.8.1'
 gem 'jquery-rails'
 gem 'ckeditor_rails'
 gem 'client_side_validations'
+gem 'capistrano'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -18,4 +19,8 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'sqlite3'
+end
+
+group :production do
+  gem 'unicorn'
 end

@@ -38,7 +38,7 @@
   <div id="twitter-link">
     <a href="https://twitter.com/mc_petyard" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @mc_petyard</a>
   </div>
-  <% cache "news#{Date.today}" do %>
+  <%# cache "news#{Date.today}" do %>
     <% Twitter.user_timeline(count: 20, include_rts: false).each do |tweet| %>
       <a href="https://twitter.com/<%= tweet.user.screen_name %>/status/<%= tweet.id %>" class="newsbox">
         <%= image_tag tweet.profile_image_url_https, :alt => tweet.user.screen_name %>
@@ -46,5 +46,5 @@
         <span class="date <%= day_class(tweet.created_at) %>"><%= time_ago_in_words(tweet.created_at) %> ago</span>
       </a>
     <% end %>
-  <% end%>
+  <%# end%>
 </div>

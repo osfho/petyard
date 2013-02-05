@@ -10,7 +10,7 @@ gem 'ckeditor_rails'
 gem 'client_side_validations'
 gem 'capistrano'
 gem 'net-ssh'
-gem 'sqlite3'
+gem 'pg', :require => 'pg'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -21,6 +21,7 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'sqlite3'
 end
 
 group :production do

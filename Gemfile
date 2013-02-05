@@ -4,7 +4,7 @@ gem 'rails', '3.2.11'
 gem 'paperclip', '~> 3.0'
 gem 'twitter', '~> 4.5.0'
 gem 'sorcery', '~> 0.8.1'
-gem 'bcrypt-ruby'
+gem 'bcrypt-ruby', :require => "bcrypt"
 gem 'jquery-rails'
 gem 'ckeditor_rails'
 gem 'client_side_validations'

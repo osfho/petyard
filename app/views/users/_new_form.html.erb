@@ -1,0 +1,17 @@
+<%= form_for(@user, :validate => true) do |f| %>
+  <div class="field">
+    <%= f.label :username, "Username (your Minecraft name)" %><br />
+    <%= f.text_field :username, :value => params[:username] %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Register" %>
+  </div>
+<% end %>

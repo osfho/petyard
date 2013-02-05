@@ -1,0 +1,40 @@
+<%= form_for(@forum, :validate => true) do |f| %>
+  <div class="contentbox">
+    <div class="field align-center">
+      <%= f.label :forum_category_id %><br />
+      <%= f.select :forum_category_id, @forum_categories.map {|m| [m.title, m.id]} %>
+    </div>
+  </div>
+  <div class="contentbox">
+    <div class="field">
+      <%= f.label :title %><br />
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <%= f.label :description %><br />
+      <%= f.text_field :description %>
+    </div>
+  </div>
+  <div class="contentbox">
+    <div class="field">
+      <%= f.label :position %><br />
+      <% if @position %>
+        <%= f.number_field :position, :value => @position %>
+      <% else %>
+        <%= f.number_field :position %>
+      <% end %>
+    </div>
+  </div>
+  <div class="contentbox">
+    <div class="field align-center">
+      <%= f.label :accessibility %><br />
+      <%= f.select :accessibility, options_for_select(Petyard::Application.config.forum_accessibilities, @forum.accessibility) %>
+    </div>
+  </div>
+  <div class="contentbox">
+    <div class="actions">
+      <%= f.submit %><br /><br />
+      <p class="align-center"><%= link_to "Cancel", forums_path %></p>
+    </div>
+  </div>
+<% end %>

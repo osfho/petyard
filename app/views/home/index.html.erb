@@ -1,0 +1,50 @@
+<% if can_access(4) %>
+  <div id="admin-actions">
+    <p>Admin actions for this page:</p>
+    <p><%= link_to "Features", features_path %> &#8226; <%= link_to "Users", users_path %> &#8226; <%= link_to "Ranks", ranks_path %></p>
+  </div>
+<% end %>
+
+<div id="feature">
+  <div class="slides_container">
+    <% @features.each do |feature| %>
+      <div><%= link_to image_tag(feature.image.url, :alt => feature.title), feature.url%></div>
+    <% end %>
+  </div>
+  <%= link_to "Previous", "javascript:void(0)", :class => "prev" %>
+  <%= link_to "Next", "javascript:void(0)", :class => "next" %>
+</div>
+<div id="sidebar">
+  <h1 class="players-online">Players Online</h1>
+    <%= render "players_online", :players_online => @players_online %>
+  <h1 class="latestforumposts">Latest Forum Posts</h1>
+  <ul>
+    <% unless latest_forum_posts.blank? %>
+      <% latest_forum_posts(5).each do |forum_post| %>
+        <li class="<%= cycle('','highlight') %>">
+          <a href="<%= url_for forum_topic_path(forum_post.topic.forum, forum_post.topic, :anchor => forum_post.id) %>" class="<%= day_class(forum_post.created_at) %>">
+            <%= forum_post.title %>
+            <span class="author">posted <span class="<%= day_class(forum_post.created_at) %>"><%= time_ago_in_words(forum_post.created_at) %> ago</span> by <%= forum_post.user.username %></span>
+          </a>
+        </li>
+      <% end %> 
+    <% else %>
+      <li class="align-center">No forum posts.</li>
+    <% end %>
+  </ul>
+</div>
+<div id="news">
+  <h1 class="serverupdates">Server Updates</h1>
+  <div id="twitter-link">
+    <a href="https://twitter.com/mc_petyard" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @mc_petyard</a>
+  </div>
+  <% cache "news#{Date.today}" do %>
+    <% Twitter.user_timeline(count: 20, include_rts: false).each do |tweet| %>
+      <a href="https://twitter.com/<%= tweet.user.screen_name %>/status/<%= tweet.id %>" class="newsbox">
+        <%= image_tag tweet.profile_image_url_https, :alt => tweet.user.screen_name %>
+        <%= tweet.text %>
+        <span class="date <%= day_class(tweet.created_at) %>"><%= time_ago_in_words(tweet.created_at) %> ago</span>
+      </a>
+    <% end %>
+  <% end%>
+</div>

@@ -1,0 +1,35 @@
+<%= form_for(@feature) do |f| %>
+  <div class="contentbox">
+    <div class="field">
+      <%= f.label :image %><br />
+      <%= f.file_field :image %>
+      <%= image_tag @feature.image.url(:thumb) if @feature.image? %>
+    </div>
+  </div>
+  <div class="contentbox">
+    <div class="field">
+      <%= f.label :title %><br />
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <%= f.label :url %><br />
+      <%= f.text_field :url %>
+    </div>
+  </div>
+  <div class="contentbox">
+    <div class="field">
+      <%= f.label :position %><br />
+      <% if @position %>
+        <%= f.number_field :position, :value => @position %>
+      <% else %>
+        <%= f.number_field :position %>
+      <% end %>
+    </div>
+  </div>
+  <div class="contentbox">
+    <div class="actions">
+      <%= f.submit %><br /><br />
+      <p class="align-center"><%= link_to "Cancel", features_path %></p>
+    </div>
+  </div>
+<% end %>

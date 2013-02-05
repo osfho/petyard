@@ -1,0 +1,23 @@
+<%= form_for(@rank, :validate => true) do |f| %>
+  <div class="contentbox">
+    <div class="field">
+      <%= f.label :title %><br />
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <%= f.label :power %><br />
+      <%= f.number_field :power %>
+    </div>
+    <div class="field">
+      <%= f.label :icon %><br />
+      <%= f.file_field :icon %>
+      <%= image_tag(@rank.icon) if @rank.icon? %>
+    </div>
+  </div>
+  <div class="contentbox">
+    <div class="actions">
+      <%= f.submit %><br /><br />
+      <p class="align-center"><%= link_to "Cancel", ranks_path %></p>
+    </div>
+  </div>
+<% end %>

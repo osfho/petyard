@@ -1,0 +1,15 @@
+<ul class="userinfo">
+  <li><%= link_to user.username, user_path(user) %></li>
+  <li><%= image_tag user.minotar(100), :alt => user.username %></li>
+  <li><%= user.title %></li>
+  <li>
+    <% if user.rank.icon? %>
+      <%= image_tag user.rank.icon, :alt => user.rank.title.capitalize %>
+    <% else %>
+      <em><%= user.rank.title.capitalize %></em>
+    <% end %>
+  </li>
+  <% if @players_online.include?(user.username) %>
+    <li><%= image_tag "in-game.png" %></li>
+  <% end %>
+</ul>

@@ -1,0 +1,46 @@
+<% if can_access(4) %>
+  <div id="admin-actions">
+    <p>Admin actions for this page:</p>
+    <p><%= link_to "Create forum category", new_forum_category_path %> &#8226; <%= link_to "Create forum", new_forum_path %></p>
+  </div>
+<% end %>
+
+<% @forum_categories.each do |forum_category| %>
+  <p class="boards-category">
+    <% if can_access(4) %>
+      <small>(<%= link_to "Edit", edit_forum_category_path(forum_category) %> | <%= link_to "Delete", forum_category, method: :delete, data: { confirm: "Delete this forum category (this is permanent)?" } %>)</small> 
+    <% end %>
+    <%= forum_category.title %>
+  </p>
+  <table class="boards">
+    <tr>
+      <th class="column-left">Forum</th>
+      <th class="column-mid">Topics</th>
+      <th class="column-right">Last post</th>
+    </tr>
+    <% forum_category.forums.each do |forum| %>
+      <% unless forum.accessibility == "staff-only" && !can_access(2) %>
+        <tr>
+          <td class="column-left">
+            <%= link_to forum.title, forum %><br />
+            <%= forum.description %>
+            <% if can_access(4) %>
+              <br /><small>(<%= link_to "Edit", edit_forum_path(forum) %> | <%= link_to "Delete", forum, method: :delete, data: { confirm: "Delete this forum (this is permanent)?" } %>)</small> 
+            <% end %>
+          </td>     
+          <td class="column-mid"><%= forum.topics.count %></td>
+          <td class="column-right">
+            <% if forum.last_post %>
+              <%= link_to forum.last_post.title, forum_topic_path(forum, forum.last_post.topic, :anchor => forum.last_post.id) %><br />
+              posted <span><%= time_ago_in_words(forum.last_post.created_at) %> ago </span> by <%= link_to forum.last_post.user.username, forum.last_post.user %>
+            <% else %>
+              -
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+<% end %>
+
+<%= render 'active_users' %>

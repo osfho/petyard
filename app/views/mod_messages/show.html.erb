@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Body:</b>
+  <%= @mod_message.body %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @mod_message.user_id %>
+</p>
+
+<p>
+  <b>Post:</b>
+  <%= @mod_message.post_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_mod_message_path(@mod_message) %> |
+<%= link_to 'Back', mod_messages_path %>

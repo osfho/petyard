@@ -1,0 +1,3 @@
+// alert("test");
+$('#players_online').html('<%= j render "players_online", :players_online => @players_online %>');
+PlayerPoller.poll();

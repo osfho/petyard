@@ -1,0 +1,19 @@
+<% if @server %>
+  <%= content_tag :div, id: "players_online", data: { url: players_online_url } do %>
+    <ul>
+      <% unless players_online.blank? %>
+        <% players_online.each do |player_name| %>
+          <li class="<%= cycle('','highlight') %>">
+            <%= link_to player_name, user_path(player_name) %>
+          </li>
+        <% end %>
+      <% else %>
+        <li class="no-players">No players online.</li>
+      <% end %>
+    </ul>
+  <% end %>
+<% else %>
+  <ul id="serveroffline">
+    <li class="align-center">Server offline.</li>
+  </ul>
+<% end %>

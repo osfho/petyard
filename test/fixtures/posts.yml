@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  body: MyText
+  image: 
+  mod_message: MyText
+  mod_id: 1
+  hidden: false
+  op: false
+  user_id: 1
+  topic_id: 1
+
+two:
+  title: MyString
+  body: MyText
+  image: 
+  mod_message: MyText
+  mod_id: 1
+  hidden: false
+  op: false
+  user_id: 1
+  topic_id: 1

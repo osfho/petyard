@@ -1,0 +1,71 @@
+<p><%= link_to "Forums home", forums_path %> &raquo;</p>
+<% unless (@forum.accessibility == "read-only" || @forum.accessibility == "reply-only") && !can_access(2) %>
+  <% if can_access(1) %>
+    <span class="forum-buttons"><%= link_to "New topic", new_forum_topic_url(@forum), :class => "button" %></span>
+  <% end %>
+<% end %>
+<h2><%= @forum.title %></h2>
+<!-- <ul class="pagination">
+  <li class="disabled">&laquo; Prev</li>
+  <li class="disabled">1</li>
+  <li><a href="#">2</a></li>
+  <li><a href="#">3</a></li>
+  <li><a href="#">Next &raquo;</a></li>
+</ul> -->
+<table class="boards">
+  <tr>
+    <th>Topic</th>
+    <th>Replies</th>
+    <th>Last post</th>
+  </tr>
+  <% if @topics.empty? && @stickies.empty? %>
+    <tr>
+      <td class="column-left">No topics.</td><td class="column-mid">-</td><td class="column-right">-</td>
+    </tr>
+  <% else %>
+    <% unless @stickies.empty? %>
+      <% @stickies.each do |sticky| %>
+        <tr>
+          <td class="column-left">
+            <%= image_tag "sticky.png" %> <%= link_to sticky.title, forum_topic_path(@forum, sticky) %><br />
+            by <small><%= link_to sticky.user.username, sticky.user %></small>
+          </td>
+          <td class="column-mid"><%= sticky.replies %></td>
+          <td class="column-right">
+              <%= link_to time_ago_in_words(sticky.last_post.created_at) + ' ago', forum_topic_path(@forum, sticky, :anchor => sticky.last_post.id) %> by <%= link_to sticky.last_post.user.username, sticky.last_post.user %>
+          </td>
+        </tr>
+      <% end %>
+      <tr><th></th><th></th><th></th></tr>
+    <% end %>
+    <% @topics.each do |topic| %>
+      <tr>
+        <td class="column-left">
+          <%= link_to topic.title, forum_topic_path(@forum, topic) %><br />
+          by <small><%= link_to topic.user.username, topic.user %></small>
+        </td>
+        <td class="column-mid"><%= topic.replies %></td>
+        <td class="column-right">
+            <%= link_to time_ago_in_words(topic.last_post.created_at) + ' ago', forum_topic_path(@forum, topic, :anchor => topic.last_post.id) %> by <%= link_to topic.last_post.user.username, topic.last_post.user %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+<% unless (@forum.accessibility == "read-only" || @forum.accessibility == "reply-only") && !can_access(2) %>
+  <% if can_access(1) %>
+    <span class="forum-buttons"><%= link_to "New topic", new_forum_topic_url(@forum), :class => "button" %></span>
+  <% end %>
+<% end %>
+
+<!-- <ul class="pagination">
+  <li class="disabled">&laquo; Prev</li>
+  <li class="disabled">1</li>
+  <li><a href="#">2</a></li>
+  <li><a href="#">3</a></li>
+  <li><a href="#">Next &raquo;</a></li>
+</ul>
+ -->
+
+ <br /><br /><br />
+<%= render 'active_users' %>

@@ -1,0 +1,48 @@
+<%= form_for(@user, :html => { :multipart => true }, :validate => true) do |f| %>
+<div class="contentbox">
+  <div class="field">
+    <%= f.label :username %><br />
+    <% if current_user.has_power(4) %>
+      <%= f.text_field :username %>
+    <% else %>
+      <%= f.text_field :username, :disabled => true %>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
+  </div>
+</div>
+<% if can_access(4) %>
+  <div class="contentbox">
+    <div class="field align-center">
+      <%= f.label :rank_id %><br />
+      <%= f.select :rank_id, @ranks.map {|m| [m.title, m.id]} %>
+    </div>
+  </div>
+<% end %>
+<div class="contentbox">
+  <div class="field">
+    <%= f.label :title, "Forum title" %><br />
+    <%= f.text_field :title %>
+  </div>
+</div>
+<div class="contentbox">
+  <div>
+    <%= image_tag @user.minotar(60), :class => 'float-left' %>
+    <%= f.label :avatar, "Avatar" %>&nbsp;&nbsp;<%= link_to("remove", remove_avatar_path(@user), method: :delete, data: { confirm: 'Remove avatar (this is permanent)?' }) if !@user.avatar.blank? %><br />
+    <%= f.file_field :avatar %><br />
+    <small>(100px &times; 100px max, 30 kilobytes max, jpg or png)</small>
+  </div>
+</div>
+<div class="contentbox">
+  <div class="actions">
+    <%= f.submit "Save" %><br /><br />
+    <p class="align-center"><%= link_to "Cancel updates", current_user %></p>
+  </div>
+</div>
+<% end %>

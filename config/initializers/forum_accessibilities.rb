@@ -1,0 +1,1 @@
+Petyard::Application.config.forum_accessibilities = ["open", "reply-only", "read-only", "staff-only"]

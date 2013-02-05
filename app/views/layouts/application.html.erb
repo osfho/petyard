@@ -1,0 +1,67 @@
+<!-- 
+© 2012 Petyard.net. Created by Josh Dresner (joshdresner.com).
+-->
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'
+  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>
+<head>
+  <title>Petyard</title>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <meta name="description" content="Women’s ski jumping will compete in the Olympics for the first time ever in the 2014 Games in Sochi. 100% is the story of how they got there.">
+  <meta name="keywords" content="sochi, 110%, 110percent, ski jumping, women's ski jumping">
+</head>
+<body id="body-<%= @page_id %>">
+<div id="wrapper">
+  <div id="header">
+    <h1><%= link_to "Petyard", root_url, :id => "logo" %></h1>
+    <ul id="navigation">
+      <li><%= link_to "Home", root_url, :class => "home" %></li>
+      <li><%= link_to "Forums", forums_url, :class => "forums" %></li>
+      <li><%= link_to "Showcase", "#", :class => "showcase" %></li>
+      <li><%= link_to "Projects", "#", :class => "projects" %></li>
+      <li><%= link_to "Factions", "#", :class => "factions" %></li>
+      <li><%= link_to "Map", "#", :class => "map" %></li>
+      <li><%= link_to "Help", "#", :class => "help" %></li>
+    </ul>
+    <div id="account-bar">
+      <% if logged_in? %>
+        <%= link_to image_tag(current_user.minotar(35), :class=> "avatar", :alt => current_user.username), current_user %>
+        <p class="align-right">Logged in as <%= link_to current_user.username, current_user %></p>
+        <p class="align-right"><%= link_to "Edit account", account_path %> &#8226; <%= link_to "Log out?", logout_path %></p>
+      <% else %>
+        <%= form_tag user_sessions_path, :method => :post do %>
+          <%= text_field_tag :username, "Username", :onfocus => "if(this.value == 'Username') {this.value = '';}", :onblur => "if (this.value == '') {this.value = 'Username';}" %>
+          <%= password_field_tag :password, "Password", :onfocus => "if(this.value == 'Password') {this.value = '';}", :onblur => "if (this.value == '') {this.value = 'Password';}" %>
+          <%= submit_tag "Log in" %><br /><br />
+          <%= check_box_tag :remember %> <%= label_tag :remember, "Remember me" %>
+          <span class="register-link"><%= link_to "Register?", register_path %></span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  
+  <%=raw show_flash %>
+
+  <%= yield %>
+
+</div>
+<div id="footer">
+  <div id="footer-wrapper">
+    <ul>
+      <li><%= link_to "Home", root_url %></li>
+      <li><%= link_to "Forums", "#" %></li>
+      <li><%= link_to "Showcase", "#" %></li>
+      <li><%= link_to "Projects", "#" %></li>
+      <li><%= link_to "Factions", "#" %></li>
+      <li><%= link_to "Map", "#" %></li>
+      <li><%= link_to "Help", "#" %></li>
+    </ul>
+    <p>&copy; 2012 Petyard.net. Created by Josh Dresner (<%= link_to "joshdresner.com", "joshdresner.com" %>).</p>
+  </div>
+</div>
+</body>
+</html>

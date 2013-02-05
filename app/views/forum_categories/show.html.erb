@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @forum_category.title %>
+</p>
+
+<p>
+  <b>Position:</b>
+  <%= @forum_category.position %>
+</p>
+
+
+<%= link_to 'Edit', edit_forum_category_path(@forum_category) %> |
+<%= link_to 'Back', forum_categories_path %>

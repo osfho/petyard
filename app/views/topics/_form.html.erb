@@ -1,0 +1,49 @@
+<%= form_for([@forum, @topic], :html => { :multipart => true }, :validate => true ) do |f| %>
+
+  <div class="contentbox">
+    <div class="field">
+      <%= f.label :title %><br />
+      <%= f.text_field :title %>
+    </div>
+  </div>
+
+  <div class="contentbox">
+    <div class="field">
+      <%= fields_for @post do |p| %>
+        <%= p.text_area :body, :class => 'ckeditor' %>
+      <% end %>
+    </div>
+  </div>
+
+  <% if current_user.has_power(3) %>
+    <div class="contentbox">
+      <div class="mod-options">
+        <%= f.check_box :locked %> <%= f.label :locked %>
+        <%= f.check_box :sticky %> <%= f.label :sticky %>
+        <% if @post.hidden %>
+          <%= hidden_field_tag 'post[hidden]', 0, :id => nil %><%= check_box_tag 'post[hidden]', 1, :checked => true %> <%= label_tag 'post[hidden]', "Hidden" %>       
+        <% else %> 
+          <%= hidden_field_tag 'post[hidden]', 0, :id => nil %><%= check_box_tag 'post[hidden]', 1 %> <%= label_tag 'post[hidden]', "Hidden" %>    
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="contentbox">
+    <div class="actions">
+      <% if controller.action_name == "new" || controller.action_name == "create" %>
+        <%= f.submit "Create" %>
+      <% else %>
+        <%= f.submit "Save" %>
+      <% end %>
+      <br /><br />
+      <p class="align-center">
+        <% if controller.action_name == "new" || controller.action_name == "create" %>
+          <%= link_to "Cancel", @forum %>
+        <% else %>
+          <%= link_to "Cancel", [@forum, @topic] %>
+        <% end %>
+      </p>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,33 @@
+<% if can_access(4) %>
+  <div id="admin-actions">
+    <p>Admin actions for this page:</p>
+    <p><%= link_to "Create rank", new_rank_path %></p>
+  </div>
+<% end %>
+
+<h2>Ranks</h2>
+
+<% unless @ranks.empty? %>
+  <% @ranks.each do |rank| %>
+    <div class="contentbox">
+      <p class="float-right">
+        <small>(<%= link_to "Edit", edit_rank_path(rank) %> | <%= link_to("Delete", rank, method: :delete, data: { confirm: "Delete this rank (this is permanent)?" }) %>)</small>
+      </p>
+      <div class="float-left">
+        <% if rank.icon? %>
+          <%= image_tag(rank.icon, :alt => rank.title.capitalize) %>
+        <% else %>
+          <em><%= rank.title.capitalize %></em>
+        <% end %> 
+      </div>
+      <p class="align-center">
+        Power: <strong><%= rank.power %></strong><br />
+        Users: <strong><%= link_to rank.users.count, users_path %></strong>
+      </p>
+    </div>
+  <% end %>
+<% else %>
+  <div class="contentbox">
+    No ranks.
+  </div>
+<% end %>

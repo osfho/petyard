@@ -1,0 +1,6 @@
+<p class="forum-stats">
+ <small><span><%=raw pluralize(@current_users.count, '</span>user') %> active on the site</small><br />
+  <% unless @current_users.empty? %>
+    <%=raw @current_users.map {|u| link_to u.username, u}.join(", ") %>
+  <% end %>
+</p>

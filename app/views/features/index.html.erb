@@ -1,0 +1,24 @@
+<% if can_access(4) %>
+  <div id="admin-actions">
+    <p>Admin actions for this page:</p>
+    <p><%= link_to "Create feature", new_feature_path %></p>
+  </div>
+<% end %>
+
+<h2>Features</h2>
+
+<% unless @features.empty? %>
+  <% @features.each do |feature| %>
+    <div class="contentbox">
+      <p class="float-right">
+        <small>(<%= link_to "Edit", edit_feature_path(feature) %> | <%= link_to "Delete", feature, method: :delete, data: { confirm: "Delete this feature (this is permanent)?" } %>)</small>
+      </p>
+      <h3><%= feature.title %></h3>
+      <%= image_tag feature.image.url(:thumb), :alt => feature.title %>
+    </div>
+  <% end %>
+<% else %>
+  <div class="contentbox">
+    There are no features... yet!
+  </div>
+<% end %>

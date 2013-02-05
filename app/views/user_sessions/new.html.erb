@@ -1,0 +1,7 @@
+<div class="form">
+  <h2>Log in</h2>
+  <div class='contentbox'>
+    <% if flash[:login_error] %><div class="flash error"><%= flash[:login_error] %></div><% end %>
+    <%= render 'form' %>
+  </div>
+</div>

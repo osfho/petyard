@@ -1,0 +1,37 @@
+<% if can_access(4) %>
+  <div id="admin-actions">
+    <p>Admin actions for this page:</p>
+    <p><%= link_to "Create user", new_user_path %></p>
+  </div>
+<% end %>
+
+<h2>Users</h2>
+
+<% unless @ranks.empty? %>
+  <% @ranks.each do |rank| %>
+    <% if rank.icon? %>
+      <%= link_to image_tag(rank.icon, :alt => rank.title.capitalize), edit_rank_url(rank) %>
+    <% else %>
+      <em><%= link_to rank.title.capitalize, edit_rank_url(rank) %></em>
+    <% end %>
+    <% unless rank.users.empty? %>
+      <% rank.users.each do |user| %>
+        <div class="contentbox">
+          <p class="float-right">
+            <small>(<%= link_to "Edit", edit_user_path(user) %> <%=raw (" | " + link_to("Delete", user, method: :delete, data: { confirm: "Delete this user (this is permanent)?" })) unless user.has_power(5) %>)</small>
+          </p>
+          <%= link_to image_tag(user.minotar(35), :class => "float-left", :alt => user.username), user %>
+          <h3><%= link_to user.username, user %></h3>  
+        </div>
+      <% end %>
+    <% else %>
+      <div class="contentbox">
+        None.
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <div class="contentbox">
+    There are no ranks to put users in! <%= link_to "Create some ranks", ranks_url %>, first.
+  </div>
+<% end %>

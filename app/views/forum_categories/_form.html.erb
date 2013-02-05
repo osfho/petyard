@@ -1,0 +1,24 @@
+<%= form_for(@forum_category, :validate => true) do |f| %>
+  <div class="contentbox">
+    <div class="field">
+      <%= f.label :title %><br />
+      <%= f.text_field :title %>
+    </div>
+  </div>
+  <div class="contentbox">
+    <div class="field">
+      <%= f.label :position %><br />
+      <% if @position %>
+        <%= f.number_field :position, :value => @position %>
+      <% else %>
+        <%= f.number_field :position %>
+      <% end %>
+    </div>
+  </div>
+  <div class="contentbox">
+    <div class="actions">
+      <%= f.submit %><br /><br />
+      <p class="align-center"><%= link_to "Cancel", forums_path %></p>
+    </div>
+  </div>
+<% end %>

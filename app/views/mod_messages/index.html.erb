@@ -1,0 +1,27 @@
+<h1>Listing mod_messages</h1>
+
+<table>
+  <tr>
+    <th>Body</th>
+    <th>User</th>
+    <th>Post</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @mod_messages.each do |mod_message| %>
+  <tr>
+    <td><%= mod_message.body %></td>
+    <td><%= mod_message.user_id %></td>
+    <td><%= mod_message.post_id %></td>
+    <td><%= link_to 'Show', mod_message %></td>
+    <td><%= link_to 'Edit', edit_mod_message_path(mod_message) %></td>
+    <td><%= link_to 'Destroy', mod_message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Mod message', new_mod_message_path %>

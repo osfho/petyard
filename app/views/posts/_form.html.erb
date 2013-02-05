@@ -1,0 +1,38 @@
+<%= form_for([@forum, @topic, @post]) do |f| %>
+
+  <div class="contentbox">
+    <div class="field">
+      <% if @quote %>
+        <%= f.text_area :body, :class => "ckeditor", :value => @quote, :validate => true %>
+      <% else %>
+        <%= f.text_area :body, :class => "ckeditor", :validate => true %>
+      <% end %>
+    </div>
+  </div>
+
+  <% if current_user.has_power(3) %>
+    <div class="contentbox">
+      <div class="mod-options">
+        <%= f.check_box :hidden %> <%= f.label :hidden %>        
+      </div>
+    </div>
+  <% end %>
+
+  <div class="contentbox">
+    <div class="actions">
+      <% if controller.action_name == "new" || controller.action_name == "create" %>
+        <%= f.submit "Create" %>
+      <% else %>
+        <%= f.submit "Save" %>
+      <% end %>
+      <br /><br />
+      <p class="align-center">
+        <% if controller.action_name == "new" || controller.action_name == "create" %>
+          <%= link_to "Cancel", [@forum, @topic] %>
+        <% else %>
+          <%= link_to "Cancel", forum_topic_path(@forum, @topic, :anchor => @post.id) %>
+        <% end %>
+      </p>
+    </div>
+  </div>
+<% end %>

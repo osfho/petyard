@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  locked: false
+  sticky: false
+  user_id: 1
+  forum_id: 1
+
+two:
+  title: MyString
+  locked: false
+  sticky: false
+  user_id: 1
+  forum_id: 1

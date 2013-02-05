@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Image:</b>
+  <%= image_tag @feature.image.url %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @feature.title %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @feature.url %>
+</p>
+
+<p>
+  <b>Position:</b>
+  <%= @feature.position %>
+</p>
+
+
+<%= link_to 'Edit', edit_feature_path(@feature) %> |
+<%= link_to 'Back', features_path %>

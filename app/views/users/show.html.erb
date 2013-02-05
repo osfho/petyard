@@ -1,0 +1,27 @@
+<div id="profile">
+  <% if @user %>
+    <% if can_access(4) && @user != current_user %>
+      <div id="admin-actions">
+        <p>Admin actions for this page:</p>
+        <p>
+          <%= link_to "Edit #{@user.username}'s account", edit_user_path(@user) %>
+        </p>
+      </div>
+    <% end %>
+    <%= render 'userinfo', :user => @user %>
+    <% if @user.unverified? && @user == current_user %>
+      <div class="profile-message">
+        <h2>Not verified!</h2>
+        <h3>Your account is restricted, because it has not been verified by an administrator. Talk to an admin in-game to get verified!</h3>
+      </div>
+    <% end %>
+  <% else %>
+    <%= render 'userinfo_template' %>
+    <div class="profile-message">
+      <h2>This account is not registered. :(</h2>
+      <% unless logged_in? %><h3>Is it yours? <%= link_to "Register it now!", register_path(:username => params[:id]) %></h3><% end %>
+    </div>
+  <% end %>
+  
+  <div class="buffer"></div>
+</div>

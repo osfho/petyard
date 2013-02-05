@@ -1,0 +1,69 @@
+<p><%= link_to "Forums home", forums_path %> &raquo; <%= link_to @forum.title, @forum %> &raquo;</p>
+
+<% unless @forum.accessibility == "read-only" && !can_access(2) %>
+  <% if can_access(1) %>
+    <span class="forum-buttons">
+      <% unless @topic.locked? %>
+        <%= link_to "Add reply", new_forum_topic_post_path(@forum, @topic), :class => "button" %>
+      <% else %>
+        <%= link_to "Locked", new_forum_topic_post_path(@forum, @topic), :class => "button disabled" %>
+      <% end %>
+    </span>
+  <% end %>
+<% end %>
+
+<h2><%= @topic.title %></h2>
+<!-- <ul class="pagination">
+  <li class="disabled">&laquo; Prev</li>
+  <li class="disabled">1</li>
+  <li><a href="#">2</a></li>
+  <li><a href="#">3</a></li>
+  <li><a href="#">Next &raquo;</a></li>
+</ul> -->
+<% @posts.each do |post| %>
+  <div class="post">
+    <p class="tag">
+      <span class="float-right">
+        <%= link_to "Quote", new_forum_topic_post_path(@forum, @topic, :quote => post.id) if can_access(1) && !post.hidden %>
+        <% if can_edit(post) %>
+          <% if post == post.topic.posts.first %>
+            <%= " | " unless post.hidden? %>
+            <%= link_to("Edit", edit_forum_topic_path(@forum, @topic)) %>
+            <%=raw " | " + link_to("Delete", forum_topic_path(@forum, @topic), method: :delete, data: { confirm: 'Delete entire topic (this is permanent)?' }) %>
+          <% else %>
+            <%= " | " unless post.hidden? %>
+            <%= link_to("Edit", edit_forum_topic_post_path(@forum, @topic, post)) %>
+            <%=raw " | " + link_to("Delete", forum_topic_post_path(@forum, @topic, post), method: :delete, data: { confirm: 'Delete post (this is permanent)?' }) %>
+          <% end %>
+        <% end %>
+      </span>
+      <%= link_to "", {}, :name => post.id %><%= link_to post.title, :anchor => post.id %>&nbsp;&nbsp;&nbsp;posted on <%= post.posted %>
+    </p>
+    <%= render 'users/userinfo', :user => post.user %>
+    <div class="post-content">
+      <%=raw post.content %>
+    </div>
+    <div class="buffer"></div>
+  </div>
+<% end %>
+<!-- <ul class="pagination">
+  <li class="disabled">&laquo; Prev</li>
+  <li class="disabled">1</li>
+  <li><a href="#">2</a></li>
+  <li><a href="#">3</a></li>
+  <li><a href="#">Next &raquo;</a></li>
+</ul> -->
+<% unless @forum.accessibility == "read-only" && !can_access(2) %>
+  <% if can_access(1) %>
+    <span class="forum-buttons">
+      <% unless @topic.locked? %>
+        <%= link_to "Add reply", new_forum_topic_post_path(@forum, @topic), :class => "button" %>
+      <% else %>
+        <%= link_to "Locked", new_forum_topic_post_path(@forum, @topic), :class => "button disabled" %>
+      <% end %>
+    </span>
+  <% end %>
+<% end %>
+
+<br /><br /><br />
+<%= render 'forums/active_users' %>

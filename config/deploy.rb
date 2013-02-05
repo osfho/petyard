@@ -13,8 +13,7 @@ set :repository, "git@github.com:osfho/#{application}.git"
 set :branch, "master"
 
 default_run_options[:pty] = true
-ssh_options[:keys] = ['C:\Users\Blackhole\.ssh']
-# ssh_options[:forward_agent] = true
+ssh_options[:forward_agent] = true
 
 after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
@@ -37,6 +36,7 @@ namespace :deploy do
 
   task :symlink_config, roles: :app do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    run "chmod +x #{release_path}/config/unicorn_init.sh"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
 

@@ -8,6 +8,7 @@ gem 'jquery-rails'
 gem 'ckeditor_rails'
 gem 'client_side_validations'
 gem 'capistrano'
+gem 'net-ssh'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

@@ -9,7 +9,7 @@
       <em><%= user.rank.title.capitalize %></em>
     <% end %>
   </li>
-  <% if @players_online.include?(user.username) %>
+  <% if @players_online && @players_online.include?(user.username) %>
     <li><%= image_tag "in-game.png" %></li>
   <% end %>
 </ul>

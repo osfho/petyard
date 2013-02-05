@@ -1,8 +1,5 @@
 production:
-  adapter: postgresql
-  encoding: unicode
-  database: petyard_production
-  host: localhost
+  adapter: sqlite3
+  database: db/production.sqlite3
   pool: 5
-  username: petyard
-  password: 
+  timeout: 5000

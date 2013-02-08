@@ -17,14 +17,13 @@ class ForumsController < ApplicationController
   # GET /forums/1.json
   def show
     @forum = Forum.includes(:topics).find_by_permalink(params[:id])
+    @topics = @forum.topics.notstickied
+    @stickies = @forum.topics.stickied
 
     if @forum.accessibility == "staff-only"
       require_power(2)
       return false
     end
-
-    @topics = @forum.topics.notstickied
-    @stickies = @forum.topics.stickied
 
     respond_to do |format|
       format.html # show.html.erb

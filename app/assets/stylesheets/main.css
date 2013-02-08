@@ -54,9 +54,9 @@ body#body-help #header ul#navigation li a.help
 #header #account-bar input { padding: 5px; }
 #header #account-bar span.register-link { float: right; }
 
-#admin-actions { position: absolute; top: 91px; left: 75px; min-width: 200px; padding: 5px 10px; background: #000; color: #fff; border-left: 1px solid #2a1e18; border-right: 1px solid #2a1e18; border-bottom: 1px solid #2a1e18; font-size: .9em; }
+#admin-actions { float: left; min-width: 200px; padding: 5px 10px; margin: -105px 0 0 20px; background: #000; color: #fff; border-left: 1px solid #2a1e18; border-right: 1px solid #2a1e18; border-bottom: 1px solid #2a1e18; font-size: .9em; }
 
-#flash { position: absolute; top: 168px; left: 122px; width: 800px; }
+#flash { width: 800px; margin: 0 auto; }
 #flash, .flash { margin-bottom: 10px; padding: 5px; border: 1px solid; text-align: center; font-weight: bold; color: #000; }
 #flash.error, .flash.error { background-color: darkred; color: white; border-color: red; }
 #flash.success, .flash.success { background-color: #10C26D; color: black; border-color: #C4FCC2; }

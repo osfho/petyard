@@ -2,7 +2,7 @@ class Forum < ActiveRecord::Base
   attr_accessible :accessibility, :description, :forum_category_id, :position, :title, :permalink
   
   belongs_to :forum_category
-  has_many :topics
+  has_many :topics, :dependent => :destroy
 
   validates :title, :presence => {:message => "* A title is required."}
   validates :title, :uniqueness => { :case_sensitive => false, :message => "* There is already a forum with this title." }

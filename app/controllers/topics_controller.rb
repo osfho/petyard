@@ -46,6 +46,7 @@ class TopicsController < ApplicationController
 
   # GET /topics/1/edit
   def edit
+    @forums = Forum.all
     @forum = Forum.find_by_permalink(params[:forum_id])
     @topic = @forum.topics.find_by_permalink(params[:id])
     @post = @topic.posts.first

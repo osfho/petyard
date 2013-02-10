@@ -3,7 +3,6 @@ class CreateTopics < ActiveRecord::Migration
     create_table :topics do |t|
       t.string :title
       t.boolean :locked
-      t.boolean :sticky
       t.integer :user_id
       t.integer :forum_id
       t.string :permalink

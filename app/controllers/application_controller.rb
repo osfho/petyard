@@ -30,5 +30,5 @@ class ApplicationController < ActionController::Base
     @server = Minequery.query("petyard.net")
     @server[:player_list] if @server
   end
-  
+
 end

@@ -1,12 +1,14 @@
 <div id="profile">
   <% if @user %>
-    <% if can_access(4) && @user != current_user %>
-      <div id="admin-actions">
-        <p>Admin actions for this page:</p>
-        <p>
-          <%= link_to "Edit #{@user.username}'s account", edit_user_path(@user) %>
-        </p>
-      </div>
+    <% content_for :admin do %>
+      <% if can_access(4) && @user != current_user %>
+        <div id="admin-actions">
+          <p>Admin actions for this page:</p>
+          <p>
+            <%= link_to "Edit #{@user.username}'s account", edit_user_path(@user) %>
+          </p>
+        </div>
+      <% end %>
     <% end %>
     <%= render 'userinfo', :user => @user %>
     <% if @user.unverified? && @user == current_user %>

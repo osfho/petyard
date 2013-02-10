@@ -7,7 +7,7 @@ class CreateRanks < ActiveRecord::Migration
       t.timestamps
     end
 
-    Rank.create(:title => 'banned', :power => 0)
+    Rank.create(:title => 'banned', :power => -1)
     Rank.create(:title => 'unverified', :power => 0)
     Rank.create(:title => 'player-0', :power => 1)
     Rank.create(:title => 'player-1', :power => 1)

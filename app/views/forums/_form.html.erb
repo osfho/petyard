@@ -4,12 +4,23 @@
       <%= f.label :forum_category_id %><br />
       <%= f.select :forum_category_id, @forum_categories.map {|m| [m.title, m.id]} %>
     </div>
+    <div class="field align-center">
+      <%= f.label :accessibility %><br />
+      <%= f.select :accessibility, options_for_select(Petyard::Application.config.forum_accessibilities, @forum.accessibility) %>
+    </div>
   </div>
   <div class="contentbox">
     <div class="field">
       <%= f.label :title %><br />
       <%= f.text_field :title %>
     </div>
+    <% if controller.action_name == "edit" %>
+      <div>
+        <%= check_box_tag :update_permalink, true, :checked => true %>
+        <%= label_tag :update_permalink, "Update permalink?" %> <small>(<%= forums_url %>/<span class="highlight">this-is-the-permalink</span>)</small>
+        <br /><br />
+      </div>
+    <% end %>
     <div class="field">
       <%= f.label :description %><br />
       <%= f.text_field :description %>
@@ -26,10 +37,7 @@
     </div>
   </div>
   <div class="contentbox">
-    <div class="field align-center">
-      <%= f.label :accessibility %><br />
-      <%= f.select :accessibility, options_for_select(Petyard::Application.config.forum_accessibilities, @forum.accessibility) %>
-    </div>
+    
   </div>
   <div class="contentbox">
     <div class="actions">

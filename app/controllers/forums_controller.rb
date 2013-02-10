@@ -1,5 +1,5 @@
 class ForumsController < ApplicationController
-  before_filter(:except => [:index, :show]) { |b| b.require_power 4 }
+  before_filter(:except => [:index, :show]) { |b| b.require_power 5 }
   before_filter :set_page_id
 
   # GET /forums
@@ -77,7 +77,7 @@ class ForumsController < ApplicationController
   def update
     @forum = Forum.find_by_permalink(params[:id])
 
-    @forum.permalink = create_permalink(params[:forum][:title])
+    @forum.permalink = create_permalink(params[:forum][:title]) if params[:update_permalink]
 
     respond_to do |format|
       if @forum.update_attributes(params[:forum])

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter(:only => [:edit, :update, :remove_avatar]) { |b| b.require_power 0 }
-  before_filter(:only => [:index, :destroy]) { |b| b.require_power 4 }
+  before_filter(:only => [:index, :destroy]) { |b| b.require_power 5 }
   before_filter :find_players_online
 
   # GET /users
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    if !current_user.has_power(4) or !params[:id]
+    if !current_user.has_power(5) or !params[:id]
       @user = current_user
     else
       @user = User.find_by_username(params[:id])

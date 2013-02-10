@@ -14,6 +14,8 @@ a { color: #ff4545; }
 a:hover { color: #ff7a7a; }
 blockquote { background-color: #080808; margin: 10px 10px 20px 10px; padding: 10px; font-size: 11px; border: 1px solid #222; }
 
+span.highlight { color: #fff; font-weight: bold; }
+
 .align-center { text-align: center; }
 .align-left { text-align: left; }
 .align-right { text-align: right; }
@@ -54,7 +56,7 @@ body#body-help #header ul#navigation li a.help
 #header #account-bar input { padding: 5px; }
 #header #account-bar span.register-link { float: right; }
 
-#admin-actions { float: left; min-width: 200px; padding: 5px 10px; margin: -105px 0 0 20px; background: #000; color: #fff; border-left: 1px solid #2a1e18; border-right: 1px solid #2a1e18; border-bottom: 1px solid #2a1e18; font-size: .9em; }
+#admin-actions { position: absolute; top: 92px; left: 20px; min-width: 200px; padding: 5px 10px; background: #000; color: #fff; border-left: 1px solid #2a1e18; border-right: 1px solid #2a1e18; border-bottom: 1px solid #2a1e18; font-size: .9em; }
 
 #flash { width: 800px; margin: 0 auto; }
 #flash, .flash { margin-bottom: 10px; padding: 5px; border: 1px solid; text-align: center; font-weight: bold; color: #000; }

@@ -1,8 +1,10 @@
-<% if can_access(4) %>
-  <div id="admin-actions">
-    <p>Admin actions for this page:</p>
-    <p><%= link_to "Create forum category", new_forum_category_path %> &#8226; <%= link_to "Create forum", new_forum_path %></p>
-  </div>
+<% content_for :admin do %>
+  <% if can_access(5) %>
+    <div id="admin-actions">
+      <p>Admin actions for this page:</p>
+      <p><%= link_to "Create forum category", new_forum_category_path %> &#8226; <%= link_to "Create forum", new_forum_path %></p>
+    </div>
+  <% end %>
 <% end %>
 
 <% @forum_categories.each do |forum_category| %>

@@ -15,7 +15,7 @@ class TopicsController < ApplicationController
   def show
     @forum = Forum.includes(:topics).find_by_permalink(params[:forum_id])
     @topic = @forum.topics.includes(:posts).find_by_permalink(params[:id])
-    @posts = @topic.posts
+    @posts = @topic.posts.order("id asc")
 
     respond_to do |format|
       format.html # show.html.erb
@@ -27,17 +27,16 @@ class TopicsController < ApplicationController
   # GET /topics/new.json
   def new
     @forum = Forum.find_by_permalink(params[:forum_id])
+    @topic = @forum.topics.build
+    @post = @topic.posts.build
 
     if @forum.accessibility == "staff-only"
       require_power(2)
     end
 
     if @forum.accessibility == "read-only" || @forum.accessibility == "reply-only"
-      require_power(3)
+      require_power(4)
     end
-
-    @topic = @forum.topics.build
-    @post = @topic.posts.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -89,12 +88,14 @@ class TopicsController < ApplicationController
   def update
     @forum = Forum.find_by_permalink(params[:forum_id])
     @topic = Topic.find_by_permalink(params[:id])
-    @post = @topic.posts.first
+    @post = @topic.posts.order("id asc").first
 
-    @topic.permalink = create_permalink(params[:topic][:title])
+    @topic.permalink = create_permalink(params[:topic][:title]) if params[:update_permalink]
 
     respond_to do |format|
       if @topic.update_attributes(params[:topic]) && @post.update_attributes(params[:post])
+        @post.title = @topic.title
+        @post.save
         format.html { redirect_to forum_topic_path(@forum, @topic), notice: 'Topic was successfully updated.' }
         format.json { head :no_content }
       else

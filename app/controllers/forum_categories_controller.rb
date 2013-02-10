@@ -1,5 +1,5 @@
 class ForumCategoriesController < ApplicationController
-  before_filter { |b| b.require_power 4 }
+  before_filter { |b| b.require_power 5 }
   before_filter :set_page_id
 
   # GET /forum_categories

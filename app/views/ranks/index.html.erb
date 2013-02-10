@@ -1,8 +1,10 @@
-<% if can_access(4) %>
-  <div id="admin-actions">
-    <p>Admin actions for this page:</p>
-    <p><%= link_to "Create rank", new_rank_path %></p>
-  </div>
+<% content_for :admin do %>
+  <% if can_access(4) %>
+    <div id="admin-actions">
+      <p>Admin actions for this page:</p>
+      <p><%= link_to "Create rank", new_rank_path %></p>
+    </div>
+  <% end %>
 <% end %>
 
 <h2>Ranks</h2>

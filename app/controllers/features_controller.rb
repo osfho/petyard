@@ -1,5 +1,5 @@
 class FeaturesController < ApplicationController
-  before_filter { |b| b.require_power 4 }
+  before_filter { |b| b.require_power 5 }
 
   # GET /features
   # GET /features.json

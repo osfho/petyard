@@ -5,6 +5,13 @@
       <%= f.label :title %><br />
       <%= f.text_field :title %>
     </div>
+    <% if controller.action_name == "edit" %>
+      <div>
+        <%= check_box_tag :update_permalink, true, :checked => true %>
+        <%= label_tag :update_permalink, "Update permalink?" %> <small>(<%= forum_url(@forum) %>/<span class="highlight">this-is-the-permalink</span>)</small>
+        <br /><br />
+      </div>
+    <% end %>
   </div>
 
   <div class="contentbox">

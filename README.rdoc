@@ -1,3 +1,0 @@
-== Petyard
-
-The code behind petyard.net.

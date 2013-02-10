@@ -8,8 +8,8 @@ class Topic < ActiveRecord::Base
   validates :title, :presence => { :message => "* Your topic must have a title." }
 
   default_scope order("latest_post_id desc")
-  scope :notstickied, where(:sticky => false)
-  scope :stickied, where(:sticky => true)
+  scope :notstickied, where("sticky != true")
+  scope :stickied, where("sticky == true")
 
   def to_param
     permalink

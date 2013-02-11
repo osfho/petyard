@@ -19,11 +19,11 @@
     <ul id="navigation">
       <li><%= link_to "Home", root_url, :class => "home" %></li>
       <li><%= link_to "Forums", forums_url, :class => "forums" %></li>
-      <li><%= link_to "Showcase", "#", :class => "showcase" %></li>
-      <li><%= link_to "Projects", "#", :class => "projects" %></li>
-      <li><%= link_to "Factions", "#", :class => "factions" %></li>
+      <li><%= link_to "Showcase", "#", :class => "disabled", :title => "Coming soon" %></li>
+      <li><%= link_to "Projects", "#", :class => "disabled", :title => "Coming soon" %></li>
+      <li><%= link_to "Factions", "#", :class => "disabled", :title => "Coming soon" %></li>
       <li><%= link_to "Map", map_url, :class => "map" %></li>
-      <li><%= link_to "Help", "#", :class => "help" %></li>
+      <li><%= link_to "Help", "#", :class => "disabled", :title => "Coming soon" %></li>
     </ul>
     <div id="account-bar">
       <% if logged_in? %>

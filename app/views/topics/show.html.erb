@@ -41,7 +41,7 @@
     </p>
     <%= render 'users/userinfo', :user => post.user %>
     <div class="post-content">
-      <%=raw post.content %>
+      <%=sanitize post.content %>
     </div>
     <div class="buffer"></div>
   </div>

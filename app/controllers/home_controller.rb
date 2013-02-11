@@ -14,6 +14,9 @@ class HomeController < ApplicationController
     end
   end
 
+  def map
+  end
+
   def players_online
     @players_online = get_players_online
   end

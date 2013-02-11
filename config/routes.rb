@@ -1,5 +1,6 @@
 Petyard::Application.routes.draw do
   get 'players_online' => 'home#players_online', :as => :players_online
+  get 'map' => 'home#map', :as => :map
 
   resources :mod_messages
 
@@ -19,8 +20,6 @@ Petyard::Application.routes.draw do
   get 'forums/:forum_id/:id' => 'topics#show', :as => :forum_topic
   put 'forums/:forum_id/:id' => 'topics#update'
   delete 'forums/:forum_id/:id' => 'topics#destroy'
- 
- 
 
   get 'register' => 'users#new', :as => :register
   get 'account' => 'users#edit', :as => :account

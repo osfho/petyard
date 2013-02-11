@@ -66,9 +66,10 @@ body#body-help #header ul#navigation li a.help
 div.contentbox { background: #000; margin: 6px 0 10px 0; padding: 10px 10px 30px; border: 1px solid #111; line-height: 1.4em; }
 div.contentbox h2 { margin: 0 0 15px; }
 div.contentbox p.readmore { margin: 10px 0 0 0; text-align: right; }
-div.contentbox span.date, div.contentbox span.tag { float: right; background-color: #050505; margin: -41px 0 0 0; padding: 4px 15px 3px 15px; color: #444; font-size: .9em; letter-spacing: .05em; text-align: right; }
-div.contentbox span.tag { color: #fff; }
+div.contentbox span.date { float: right; background-color: #050505; margin: -41px 0 0 0; padding: 4px 15px 3px 15px; color: #444; font-size: .9em; letter-spacing: .05em; text-align: right; }
 div.contentbox p.author { margin: -10px 0 10px 0; font-size: .9em; font-style: italic; }
+
+div.tag { margin: 0 auto; color: #fff; background-color: #050505; padding: 4px 15px 3px 15px; font-size: .9em; letter-spacing: .05em; text-align: center; border: 1px solid #333; }
 
 div.contenttile { position: relative; float: left; background: #000; margin: 5px; width: 306px; height: 174px; border: 1px solid #111; overflow: hidden; }
 div.contenttile.feature { width: 625px; height: 360px; margin-right: 4px; }

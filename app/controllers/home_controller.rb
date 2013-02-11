@@ -15,6 +15,7 @@ class HomeController < ApplicationController
   end
 
   def map
+    @page_id = 'map'
   end
 
   def players_online

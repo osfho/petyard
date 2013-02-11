@@ -35,6 +35,7 @@ namespace :deploy do
   after "deploy:setup", "deploy:setup_config"
 
   task :symlink_config, roles: :app do
+    run "ln -nfs /home/minecraft/maps/petyard #{release_path}/public/high-res-map"
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
     run "chmod +x #{release_path}/config/unicorn_init.sh"
   end

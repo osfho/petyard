@@ -1,0 +1,20 @@
+<p class="align-right"><%= link_to "Create project", new_project_path, :class => "button" %></p>
+
+<ul id="projects">
+    <% unless @projects.empty? %>
+        <% @projects.each do |project| %>
+            <li class="<%= cycle('', 'highlight') %>">
+                <a href="<%= url_for(project) %>">
+                    <% if project.invite_only? %>
+                        <span class="membership invite-only">Invite-only</span>
+                    <% else %>
+                        <span class="membership open">Open to all</span>
+                    <% end %>
+                    <h3><%= project.title %></h3>
+                </a>
+            </li>
+        <% end %>
+    <% else %>
+        <li class="no-projects align-center">No projects.</li>
+    <% end %>
+</ul>

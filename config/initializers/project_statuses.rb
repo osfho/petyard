@@ -1,0 +1,1 @@
+Petyard::Application.config.project_statuses = ["active", "inactive", "complete", "abandoned"]

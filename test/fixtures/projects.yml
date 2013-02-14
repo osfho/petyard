@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  permalink: MyString
+  description: MyText
+  creator_id: 1
+  feature_image: 
+  x_coordinate: 1
+  y_coordinate: 1
+  z_coordinate: 1
+  visible: 
+  invite_only: false
+  status: MyString
+
+two:
+  title: MyString
+  permalink: MyString
+  description: MyText
+  creator_id: 1
+  feature_image: 
+  x_coordinate: 1
+  y_coordinate: 1
+  z_coordinate: 1
+  visible: 
+  invite_only: false
+  status: MyString

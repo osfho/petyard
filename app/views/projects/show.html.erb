@@ -5,7 +5,7 @@
     <% if @project.x_coordinate or @project.y_coordinate or @project.z_coordinate %>
       <h3>Location</h3>
       x: <%= @project.x_coordinate %>, y: <%= @project.y_coordinate %>, z: <%= @project.z_coordinate %><br />
-      <%= link_to "map", (root_url(:port => 8123) + "?worldname=world&mapname=flat&zoom=0&x=#{@project.x_coordinate}&y=#{@project.y_coordinate}&z=#{@project.z_coordinate}") %>
+      <%= link_to "map", (root_url(:port => 8123) + "?worldname=world&mapname=flat&zoom=5&x=#{@project.x_coordinate}&y=#{@project.y_coordinate}&z=#{@project.z_coordinate}"), :target => "_blank" %>
     <% end %>
     <br /><br /><br />
     <% if (can_access(1) && !@project.invite_only?) && !@project.users.include?(current_user) %>

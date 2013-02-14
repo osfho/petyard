@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :topics, :dependent => :destroy
   has_many :posts, :dependent => :destroy
   has_many :mod_messages, :dependent => :destroy
+  has_many :projects
   has_attached_file :avatar, :styles => { :large => "100x100>", :medium => "60x60>", :small => "35x35>" }, :dependent => :destroy
   
   validates :password, :presence => { :message => "* You must choose a password." }, :on => :create

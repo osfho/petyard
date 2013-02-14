@@ -1,0 +1,1 @@
+Petyard::Application.config.project_roles = ["member", "admin", "founder"]

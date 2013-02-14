@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
   has_many :topics, :dependent => :destroy
   has_many :posts, :dependent => :destroy
   has_many :mod_messages, :dependent => :destroy
-  has_many :projects
+  has_many :project_memberships
+  has_many :projects, :through => :project_memberships
   has_attached_file :avatar, :styles => { :large => "100x100>", :medium => "60x60>", :small => "35x35>" }, :dependent => :destroy
   
   validates :password, :presence => { :message => "* You must choose a password." }, :on => :create
@@ -48,6 +49,14 @@ class User < ActiveRecord::Base
 
   def self.find_by_username(username)
     find(:first, :conditions => ["LOWER(username) = ?", username.downcase])
+  end
+
+  def project_role(project)
+    if project_memberships.find_by_project_id(project.id)
+      return self.project_memberships.find_by_project_id(project.id).role
+    else
+      return false
+    end
   end
 
 end

@@ -1,9 +1,14 @@
 Petyard::Application.routes.draw do
-  resources :projects
-
-
   get 'players_online' => 'home#players_online', :as => :players_online
   get 'map' => 'home#map', :as => :map
+
+  resources :projects do
+    member do
+      get 'join'
+    end
+
+    resources :project_memberships
+  end
 
   resources :mod_messages
 

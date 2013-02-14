@@ -1,4 +1,85 @@
 <div id="project">
-  <h2><%= @project.title %></h2>
-  <%= image_tag @project.feature_image, :id => "feature-image" if @project.feature_image %>
+  <div class="contentbox project-sidebar align-center">
+    <h2><%= @project.title %></h2>
+    <p><%= @project.description %></p>
+    <% if @project.x_coordinate or @project.y_coordinate or @project.z_coordinate %>
+      <h3>Location</h3>
+      x: <%= @project.x_coordinate %>, y: <%= @project.y_coordinate %>, z: <%= @project.z_coordinate %><br />
+      <%= link_to "map", (root_url(:port => 8123) + "?worldname=world&mapname=flat&zoom=0&x=#{@project.x_coordinate}&y=#{@project.y_coordinate}&z=#{@project.z_coordinate}") %>
+    <% end %>
+    <br /><br /><br />
+    <% if (can_access(1) && !@project.invite_only?) && !@project.users.include?(current_user) %>
+      <div class="align-center"><%= link_to "Join project", join_project_path(@project), :class => "button" %></div>
+      <br />
+    <% else %>
+      <% if (can_access(1) && @project.invite_only?) %>
+        <div class="align-center"><%= link_to "Invite-only", join_project_path(@project), :class => "button disabled" %></div>
+        <br />
+      <% end %>
+    <% end %>
+    <% if (can_access(1) && (current_user.project_role(@project) == "founder" || current_user.project_role(@project) == "admin")) || can_access(4) %>
+      <%= link_to "Edit project", edit_project_path(@project) %>
+    <% end %>
+    <% if can_access(4) %>
+      <%= link_to "Delete project", @project, method: :delete, data: { confirm: 'Delete project (this is permanent)?' } %>
+    <% end %>
+  </div>
+  <div class="contentbox project-sidebar">
+    <h3>Founders</h3>
+    <ul>
+      <% unless @founderships.empty? %>
+        <% @founderships.each do |membership| %>
+          <li>
+            <% if can_access(4) %>
+              <%= link_to "[remove]", project_project_membership_path(@project, membership), method: :delete, :class => "remove-link" %>
+            <% end %>
+            <%= link_to image_tag(membership.user.minotar(35), :alt => membership.user.username, :class => "float-left") + membership.user.username, membership.user %> 
+          </li>
+        <% end %>
+      <% else %>
+        No founders.
+      <% end %>
+    </ul>  
+    <h3>Admins</h3>
+    <ul>
+      <% unless @adminships.empty? %>
+        <% @adminships.each do |membership| %>
+          <li>
+            <% if (can_access(1) and current_user.project_role(@project) == "founder") || can_access(4) %>
+              <%= link_to "[remove]", project_project_membership_path(@project, membership), method: :delete, :class => "remove-link" %>
+            <% end %>
+            <%= link_to image_tag(membership.user.minotar(35), :alt => membership.user.username, :class => "float-left") + membership.user.username, membership.user %> 
+          </li>
+        <% end %>
+      <% else %>
+        No admins.
+      <% end %>
+    </ul>
+    <h3>Members</h3>
+    <ul>
+      <% unless @memberships.empty? %>
+        <% @memberships.each do |membership| %>
+          <li>
+            <% if (can_access(1) and (current_user.project_role(@project) == "founder" || current_user.project_role(@project) == "admin")) || can_access(4) %>
+              <%= link_to "[remove]", project_project_membership_path(@project, membership), method: :delete, :class => "remove-link" %>
+            <% end %>
+            <%= link_to image_tag(membership.user.minotar(35), :alt => membership.user.username, :class => "float-left") + membership.user.username, membership.user %> 
+          </li>
+        <% end %>
+      <% else %>
+        No members.
+      <% end %>
+    </ul>
+    <% if (can_access(1) && (current_user.project_role(@project) == "founder" || current_user.project_role(@project) == "admin")) || can_access(4) %>
+      <div class="align-center"><%= link_to "Add user", new_project_project_membership_path(@project), :class => "button" %></div>
+    <% end %>
+  </div>
+  <div id="project-main">
+    <%= image_tag @project.feature_image, :id => "project-feature" if @project.feature_image %>
+    <!--
+    <div class="contentbox project-gallery">
+      Gallery will go here.
+    </div>
+    -->
+  </div>
 </div>

@@ -1,4 +1,6 @@
 <%= form_for(@project, :html => { :multipart => true }, :validate => true) do |f| %>
+
+  <h3>Required information</h3>
   <div class="contentbox">
     <div class="field">
       <%= f.label :title %><br />
@@ -11,14 +13,16 @@
         <br /><br />
       </div>
     <% end %>
-    <div class="field">
-      <%= f.label :description %><br />
-      <%= f.text_area :description %>
-    </div>
   </div>
 
-  <h3>Coordinates</h3>
+  <h3>Optional information</h3>
   <div class="contentbox">
+    <div class="field">
+      <%= f.label :feature_image %><br />
+      <%= f.file_field :feature_image %>
+      <small>(613 &times; 613 max, 3 megabytes max, jpg or png)</small>
+    </div>
+    <br />
     <div class="inline-field">
       <%= f.label :x_coordinate, "X-Coordinate" %><br />
       <%= f.text_field :x_coordinate, :maxlength => 5 %>
@@ -31,19 +35,14 @@
       <%= f.label :z_coordinate, "Z-Coordinate" %><br />
       <%= f.text_field :z_coordinate, :maxlength => 5 %>
     </div>
-    <br class="break" /><br /><br /><br />
-    <p class="align-center"><small>(optional)</small></p>
-  </div>
-
-  <h3>Uploads</h3>
-  <div class="contentbox">
+    <br class="break" /><br /><br /><br /><br />
     <div class="field">
-      <%= f.label :feature_image %> <small>(optional)</small><br />
-      <%= f.file_field :feature_image %>
+      <%= f.label :description %><br />
+      <%= f.text_area :description %>
     </div>
   </div>
 
-  <h3>Options</h3>
+  <h3>Project settings</h3>
   <div class="contentbox">
     <div>
       <%= f.label :visible, "Visibility" %><br />

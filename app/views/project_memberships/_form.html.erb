@@ -1,0 +1,18 @@
+<%= form_for([@project, @project_membership], :validate => true) do |f| %>
+  <div class="contentbox align-center">
+    <div class="field">
+      <%= f.label :user_id %><br />
+      <%= f.select :user_id, @users.map {|m| [m.username, m.id]} %>
+    </div>
+    <br />
+    <div class="field">
+      <%= f.label :role %><br />
+      <%= f.select :role, options_for_select(Petyard::Application.config.project_roles, @project_membership.role) %>
+    </div>
+  </div>
+  <div class="contentbox">
+    <div class="actions">
+      <%= f.submit "Save" %>
+    </div>
+  </div>
+<% end %>
